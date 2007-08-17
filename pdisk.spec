@@ -58,6 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/newfs_hfs
 /sbin/fsck_hfs
 
-%{_mandir}/man8/pdisk.8.bz2
-%{_mandir}/man8/newfs_hfs.8.bz2
+%{_mandir}/man8/pdisk.*
+%{_mandir}/man8/newfs_hfs.*
 
