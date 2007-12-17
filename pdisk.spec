@@ -15,7 +15,6 @@ Patch0:			pdisk-changetype.patch
 Patch1:			http://www.ardistech.com/hfsplus/diskdev_cmds.diff
 Patch2:			pdisk-gcc-4.0.patch
 URL:			http://cantaforda.com/cfcl/eryk/linux/pdisk/index.html
-BuildRoot:		%{_tmppath}/%{name}-buildroot
 
 %description
 pdisk enables you to view and modify Apple Macintosh-style partition maps.
