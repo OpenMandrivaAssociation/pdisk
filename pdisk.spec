@@ -1,11 +1,10 @@
 %define version 0.8
-%define release %mkrel 8
 %define diskdev_cmds diskdev_cmds-208.11
 
 Summary:		A partitioning tool for Apple Macintosh-style partitioned disks
 Name:			pdisk
 Version:		%{version}
-Release:		%{release}
+Release:		%mkrel 9
 License:		Apple Public Source License
 Group:			System/Base
 
