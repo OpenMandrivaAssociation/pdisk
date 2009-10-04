@@ -13,6 +13,8 @@ Source1:		http://www.opensource.apple.com/darwinsource/tarballs/apsl/diskdev_cmd
 Patch0:			pdisk-changetype.patch
 Patch1:			http://www.ardistech.com/hfsplus/diskdev_cmds.diff
 Patch2:			pdisk-gcc-4.0.patch
+Patch3:			pdisk-gcc44.patch
+Patch4:			pdisk-fix-str-fmt.patch
 URL:			http://cantaforda.com/cfcl/eryk/linux/pdisk/index.html
 BuildRoot:		%{_tmppath}/%{name}-buildroot
 
@@ -31,9 +33,11 @@ pushd %{diskdev_cmds}
 %patch1 -p1 -b .hfsplus
 popd
 %patch2 -p1 -b .gcc40
+%patch3 -p0 -b .gcc44
+%patch4 -p0 -b .str
 
 %build
-%make
+%make CFLAGS="%{optflags}"
 cd %{diskdev_cmds}
 %make -f Makefile.lnx
 
