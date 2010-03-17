@@ -4,7 +4,7 @@
 Summary:		A partitioning tool for Apple Macintosh-style partitioned disks
 Name:			pdisk
 Version:		%{version}
-Release:		%mkrel 10
+Release:		%mkrel 11
 License:		Apple Public Source License
 Group:			System/Base
 
