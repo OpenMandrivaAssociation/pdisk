@@ -42,17 +42,17 @@ cd %{diskdev_cmds}
 %make -f Makefile.lnx
 
 %install
-mkdir -p $RPM_BUILD_ROOT/sbin
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man8
-install -m755 pdisk $RPM_BUILD_ROOT/sbin/pdisk
-install -m444 pdisk.8 $RPM_BUILD_ROOT%{_mandir}/man8
-install -m755 %{diskdev_cmds}/fsck_hfs.tproj/fsck_hfs $RPM_BUILD_ROOT/sbin
-install -m755 %{diskdev_cmds}/newfs_hfs.tproj/newfs_hfs $RPM_BUILD_ROOT/sbin
-install -m444 %{diskdev_cmds}/newfs_hfs.tproj/newfs_hfs.8 $RPM_BUILD_ROOT%{_mandir}/man8
+mkdir -p %{buildroot}/sbin
+mkdir -p %{buildroot}%{_mandir}/man8
+install -m755 pdisk %{buildroot}/sbin/pdisk
+install -m444 pdisk.8 %{buildroot}%{_mandir}/man8
+install -m755 %{diskdev_cmds}/fsck_hfs.tproj/fsck_hfs %{buildroot}/sbin
+install -m755 %{diskdev_cmds}/newfs_hfs.tproj/newfs_hfs %{buildroot}/sbin
+install -m444 %{diskdev_cmds}/newfs_hfs.tproj/newfs_hfs.8 %{buildroot}%{_mandir}/man8
 chmod 0444 README pdisk.html
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr (-,root,root)
