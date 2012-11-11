@@ -1,0 +1,24 @@
+--- pdisk/diskdev_cmds-208.11/fsck_hfs.tproj/dfalib/BTreeNodeOps.c.gcc40	2005-05-16 18:57:17.885898095 +0200
++++ pdisk/diskdev_cmds-208.11/fsck_hfs.tproj/dfalib/BTreeNodeOps.c	2005-05-16 19:21:10.633438578 +0200
+@@ -642,7 +642,9 @@
+ 
+ 	if ( btreePtr->attributes & kBTBigKeysMask )
+ 	{
+-		SET_SWAP_BE16(*((u_big_int16_t *) dst)++, keyLength);		// use keyLength rather than key.length
++		SET_SWAP_BE16(*((u_big_int16_t *) dst), keyLength);
++		dst = *((u_big_int16_t *) dst) + 1;
++		// use keyLength rather than key.length
+ 		rawKeyLength = SWAP_BE16(keyPtr->length16);
+ 		sizeOfLength = 2;
+ 	}
+--- pdisk/diskdev_cmds-208.11/fsck_hfs.tproj/dfalib/BTreeScanner.c.gcc40	2005-05-16 19:09:06.311001441 +0200
++++ pdisk/diskdev_cmds-208.11/fsck_hfs.tproj/dfalib/BTreeScanner.c	2005-05-16 19:15:08.293692473 +0200
+@@ -155,7 +155,7 @@
+ 			if ( scanState->nodeNum >= scanState->btcb->totalNodes )
+ 				return fsEndOfIterationErr;
+ 
+-			(u_int8_t *) scanState->currentNodePtr += scanState->btcb->nodeSize;
++			scanState->currentNodePtr = (u_int8_t *) scanState->currentNodePtr + scanState->btcb->nodeSize;
+ 		}
+ 		
+ 		// Make sure this is a valid node

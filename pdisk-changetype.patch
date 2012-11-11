@@ -1,0 +1,73 @@
+--- pdisk/pdisk.c.bak	2003-07-28 23:22:25.000000000 +0200
++++ pdisk/pdisk.c	2003-07-28 23:22:34.000000000 +0200
+@@ -122,6 +122,7 @@
+ void do_examine_patch_partition(partition_map_header *map);
+ int do_expert(partition_map_header *map, char *name);
+ void do_rename_partition(partition_map_header *map);
++void do_retype_partition(partition_map_header *map);
+ void do_reorder(partition_map_header *map);
+ void do_write_partition_map(partition_map_header *map);
+ void edit(char *name, int ask_logical_size);
+@@ -542,6 +543,7 @@
+ 	    printf("  c    create new partition (standard linux type)\n");
+ 	    printf("  C    (create with type also specified)\n");
+ 	    printf("  n    (re)name a partition\n");
++	    printf("  t    (re)type a partition\n");
+ 	    printf("  d    delete a partition\n");
+ 	    printf("  r    reorder partition entry in map\n");
+ 	    if (!rflag) {
+@@ -582,6 +584,10 @@
+ 	case 'n':
+ 	    do_rename_partition(map);
+ 	    break;
++	case 'T':
++	case 't':
++	    do_retype_partition(map);
++	    break;
+ 	case 'D':
+ 	case 'd':
+ 	    do_delete_partition(map);
+@@ -776,6 +782,43 @@
+ 
+ 
+ void
++do_retype_partition(partition_map_header *map)
++{
++    partition_map * entry;
++    long index;
++    char *type;
++
++    if (map == NULL) {
++	bad_input("No partition map exists");
++	return;
++    }
++    if (!rflag && map->writeable == 0) {
++	printf("The map is not writeable.\n");
++    }
++    if (get_number_argument("Partition number: ", &index, kDefault) == 0) {
++	bad_input("Bad partition number");
++	return;
++    }
++    if (get_string_argument("New type of partition: ", &type, 1) == 0) {
++	bad_input("Bad type");
++	return;
++    }
++
++	// find partition and change it
++    entry = find_entry_by_disk_address(index, map);
++    if (entry == NULL) {
++	printf("No such partition\n");
++    } else {
++	// stuff name into partition map entry data
++	strncpy(entry->data->dpme_type, type, DPISTRLEN);
++	map->changed = 1;
++    }
++    free(type);
++    return;
++}
++
++
++void
+ do_delete_partition(partition_map_header *map)
+ {
+     partition_map * cur;

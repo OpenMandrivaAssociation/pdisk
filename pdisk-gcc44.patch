@@ -1,0 +1,38 @@
+--- dump.c~	2000-05-16 16:09:02.000000000 +0200
++++ dump.c	2009-10-04 18:07:42.000000000 +0200
+@@ -131,7 +131,7 @@
+ int get_max_base_or_length(partition_map_header *map);
+ int get_max_name_string_length(partition_map_header *map);
+ int get_max_type_string_length(partition_map_header *map);
+-int strnlen(char *s, int n);
++int mystrnlen(char *s, int n);
+ 
+ 
+ //
+@@ -784,7 +784,7 @@
+ }
+ 
+ int
+-strnlen(char *s, int n)
++mystrnlen(char *s, int n)
+ {
+     int i;
+ 
+@@ -811,7 +811,7 @@
+     max = 0;
+ 
+     for (entry = map->disk_order; entry != NULL; entry = entry->next_on_disk) {
+-	length = strnlen(entry->data->dpme_type, DPISTRLEN);
++	length = mystrnlen(entry->data->dpme_type, DPISTRLEN);
+ 	if (length > max) {
+ 	    max = length;
+ 	}
+@@ -834,7 +834,7 @@
+     max = 0;
+ 
+     for (entry = map->disk_order; entry != NULL; entry = entry->next_on_disk) {
+-	length = strnlen(entry->data->dpme_name, DPISTRLEN);
++	length = mystrnlen(entry->data->dpme_name, DPISTRLEN);
+ 	if (length > max) {
+ 	    max = length;
+ 	}
