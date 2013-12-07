@@ -3,7 +3,7 @@
 Summary:	A partitioning tool for Apple Macintosh-style partitioned disks
 Name:		pdisk
 Version:	0.8
-Release:	17
+Release:	18
 License:	Apple Public Source License
 Group:		System/Base
 Url:		http://cantaforda.com/cfcl/eryk/linux/pdisk/index.html
