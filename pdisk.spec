@@ -6,7 +6,7 @@ Version:	0.8
 Release:	20
 License:	Apple Public Source License
 Group:		System/Base
-Url:		http://cantaforda.com/cfcl/eryk/linux/pdisk/index.html
+Url:		https://cantaforda.com/cfcl/eryk/linux/pdisk/index.html
 Source0:	ftp://cfcl.com/pub/ev/pdisk.20000516.src.tar.bz2
 Source1:	http://www.opensource.apple.com/darwinsource/tarballs/apsl/diskdev_cmds-208.11.tar.bz2
 Patch0:		pdisk-changetype.patch
